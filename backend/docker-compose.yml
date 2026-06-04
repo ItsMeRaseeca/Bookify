@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:17-alpine
+    container_name: odoo-reborn-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: odoo_user
+      POSTGRES_PASSWORD: odoo_password
+      POSTGRES_DB: odoo_reborn
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo_user -d odoo_reborn"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  # Main Backend API Server
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: odoo-reborn-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=postgresql://odoo_user:odoo_password@postgres:5432/odoo_reborn
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=7d
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - MEDIA_STREAM_WS_URL=${MEDIA_STREAM_WS_URL}
+      - IVR_WEBHOOK_URL=${IVR_WEBHOOK_URL}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - FROM_EMAIL=${FROM_EMAIL}
+      - WHATSAPP_API_URL=${WHATSAPP_API_URL}
+      - WHATSAPP_API_KEY=${WHATSAPP_API_KEY}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # IVR Media Stream WebSocket Server
+  ivr-media-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.ivr
+    container_name: odoo-reborn-ivr
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - MEDIA_STREAM_PORT=8080
+      - DATABASE_URL=postgresql://odoo_user:odoo_password@postgres:5432/odoo_reborn
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
