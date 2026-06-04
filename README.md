@@ -1,4 +1,4 @@
-# 📚 Bookify
+# Bookify
 
 **Bookify** is a modern, full-stack service booking platform designed to streamline service discovery, scheduling, and management. It features a powerful AI Chat Assistant and Voice Assistant to help users book services effortlessly.
 
