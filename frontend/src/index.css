@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background & Surface */
+    --background: 0 0% 98%;
+    --foreground: 230 25% 12%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 230 25% 12%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 25% 12%;
+    
+    /* Primary - #4F46E5 */
+    --primary: 244 76% 59%;
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 244 60% 90%;
+    
+    /* Secondary */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+    
+    /* Muted */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    /* Accent - Warm Amber */
+    --accent: 35 92% 52%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Status Colors */
+    --available: 142 71% 45%;
+    --available-foreground: 0 0% 100%;
+    --hold: 38 92% 50%;
+    --hold-foreground: 0 0% 100%;
+    --booked: 0 72% 51%;
+    --booked-foreground: 0 0% 100%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* UI Elements */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 244 76% 59%;
+    
+    --radius: 0.75rem;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 230 25% 12%;
+    --sidebar-primary: 244 76% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 230 25% 12%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 244 76% 59%;
+    
+    /* Gradients - Making them solid or subtle based on request, but mainly buttons use variant */
+    /* Updating gradient-primary to just be the primary color to "remove gradient" effect effectively if used */
+    --gradient-primary: linear-gradient(0deg, hsl(244 76% 59%), hsl(244 76% 59%));
+    --gradient-accent: linear-gradient(135deg, hsl(35 92% 52%), hsl(25 95% 53%));
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 14% 98%));
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(230 25% 12% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(230 25% 12% / 0.1), 0 2px 4px -2px hsl(230 25% 12% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(230 25% 12% / 0.1), 0 4px 6px -4px hsl(230 25% 12% / 0.1);
+    --shadow-glow: 0 0 20px hsl(234 89% 54% / 0.3);
+  }
+
+  .dark {
+    --background: 230 25% 8%;
+    --foreground: 0 0% 98%;
+    
+    --card: 230 25% 12%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 230 25% 12%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 244 76% 59%;
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 244 60% 20%;
+    
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 35 92% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --available: 142 71% 50%;
+    --available-foreground: 0 0% 100%;
+    --hold: 38 92% 55%;
+    --hold-foreground: 0 0% 100%;
+    --booked: 0 72% 55%;
+    --booked-foreground: 0 0% 100%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 244 76% 59%;
+    
+    --sidebar-background: 230 25% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 244 76% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 20% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 230 20% 22%;
+    --sidebar-ring: 244 76% 59%;
+    
+    --gradient-primary: linear-gradient(0deg, hsl(244 76% 59%), hsl(244 76% 59%));
+    --gradient-accent: linear-gradient(135deg, hsl(35 92% 55%), hsl(25 95% 58%));
+    --gradient-surface: linear-gradient(180deg, hsl(230 25% 12%), hsl(230 25% 10%));
+    
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -2px hsl(0 0% 0% / 0.3);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -4px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 20px hsl(234 89% 64% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+  
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .animate-in {
+    animation: fade-in 0.3s ease-out, slide-up 0.3s ease-out;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
