@@ -1,5 +1,4 @@
 # Bookify
-0xJARS Odoo Submission Video: https://drive.google.com/file/d/10LQM8UEdAypsNNWZTKlLGYBqCscU1txl/view?usp=sharing
 
 Bookify is a modern booking platform with a React/Vite frontend and a Node.js/Express/Prisma backend.
 
